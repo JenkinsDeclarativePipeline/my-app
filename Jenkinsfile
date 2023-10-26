@@ -13,6 +13,6 @@ node('maven')
     stage('Maven_Build')
     {
         tool name: 'mvn-3.9.5', type: 'maven'
-        sh '${mvn-3.9.5}/bin/mvn -version'
+        sh "${mvn-3.9.5}/bin/mvn -version"
     }
 }
