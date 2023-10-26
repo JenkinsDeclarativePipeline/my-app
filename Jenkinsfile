@@ -10,4 +10,9 @@ node('maven')
         userRemoteConfigs: [[credentialsId: 'JenkinsDeclarativePipeline', url: 'https://github.com/JenkinsDeclarativePipeline/my-app.git']]
         )
     }
+    stage('Maven_Build')
+    {
+        tool name: 'mvn-3.9.5', type: 'maven'
+        sh '${mvn-3.9.5}/bin/mvn -version'
+    }
 }
