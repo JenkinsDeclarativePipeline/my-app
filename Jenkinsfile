@@ -13,6 +13,6 @@ node('maven')
     stage('Maven_Build')
     {
         def mvn = tool name: 'mvn-3.9.5', type: 'maven'
-        sh "${mvn}/bin/mvn -version"
+        sh "${mvn}/bin/mvn clean package"
     }
 }
