@@ -1,8 +1,8 @@
 node('maven')
 {
-    properties([
+    /*properties([
         string(name: 'Branch_Name', defaultValue: 'master', description: 'Enter Branch name')
-    ])
+    ])*/
     stage('SCM_Checkout')
     {
         checkout scmGit(branches: [[name: '*/master']], 
