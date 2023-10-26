@@ -1,4 +1,4 @@
-node(maven)
+node('maven')
 {
     git_branch = properties([
         string(name: 'Branch_Name', defaultValue: 'master', description: 'Enter Branch name')
