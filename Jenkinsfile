@@ -18,11 +18,26 @@ node('maven')
     }
     stage('SonarQube_Code_Check')
     {
-        sh "${mvn}/bin/mvn sonar:sonar \
+        withSonarQubeEnv('sonar-9.9.2') 
+        {
+      // requires SonarQube Scanner for Maven 3.2+
+            sh "${mvn}/bin/mvn sonar:sonar \
             -Dsonar.projectKey=maven-practice \
             -Dsonar.host.url=http://3.27.9.220:9000 \
             -Dsonar.login=sqp_a39cde1e37b3368b3ce32873897575263deaed4a"
+        }        
     }
+    stage("Quality Gate"){
+          timeout(time: 30, unit: 'MINUTES') 
+          {
+              def qg = waitForQualityGate()
+              if (qg.status != 'OK') //when-not-equals
+              {
+                slackSend baseUrl: 'https://app.slack.com/client/', channel: '#my-app', color: 'danger', message: 'Welcome to Jenkins', teamDomain: 'devops', tokenCredentialId: 'slack-cred', username: 'suriyapraba981'
+                  error "Pipeline aborted due to quality gate failure: ${qg.status}"
+              }
+          }
+      }        
     stage('Slack_Notification')
     {
         slackSend baseUrl: 'https://app.slack.com/client/', channel: '#my-app', color: 'good', message: 'Welcome to Jenkins', teamDomain: 'devops', tokenCredentialId: 'slack-cred', username: 'suriyapraba981'
