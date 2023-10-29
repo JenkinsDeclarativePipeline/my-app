@@ -23,7 +23,7 @@ node('maven')
       // requires SonarQube Scanner for Maven 3.2+
             sh "${mvn}/bin/mvn sonar:sonar \
             -Dsonar.projectKey=maven-practice \
-            -Dsonar.host.url=http://3.27.9.220:9000 \
+            -Dsonar.host.url=http://3.25.188.87:9000/ \
             -Dsonar.login=sqp_a39cde1e37b3368b3ce32873897575263deaed4a"
         }        
     }
